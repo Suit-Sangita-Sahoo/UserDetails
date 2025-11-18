@@ -6,7 +6,7 @@ import Home from "./Home";
 const Layout = () => {
   return (
     <div>
-      <Home />
+      <Navbar />
       <div className="pt-[20px]">
         <Outlet />
       </div>

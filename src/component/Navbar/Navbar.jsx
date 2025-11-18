@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Home from "../Home";
 
 const Navbar = () => {
   const [Name, setName] = useState("");
@@ -48,7 +49,9 @@ const Navbar = () => {
         </div>
 
       </div>
+      
     </nav>
+    
   );
 };
 
