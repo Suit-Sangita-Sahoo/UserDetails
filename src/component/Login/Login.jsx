@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [formdata, setFormData] = useState({
@@ -8,7 +8,7 @@ const Login = () => {
     password: "",
   });
 
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,13 +28,10 @@ const Login = () => {
       toast.warning("User not registered!");
       return;
     }
+
     if (current_user.password === formdata.password) {
       toast.success("Login Successful!");
-
-      
       localStorage.setItem("current_user", JSON.stringify(current_user));
-    
-
       navigate("/profile");
     } else {
       toast.error("Incorrect Password!");
@@ -42,56 +39,74 @@ const Login = () => {
   };
 
   return (
-    <form onSubmit={handleForm}>
-      <div className="w-[350px] bg-blue-400 mx-auto mt-[130px] text-white rounded-2xl p-6 shadow-lg">
-        <h1 className="text-[24px] text-center font-bold mb-6">
-          Welcome Back ⭐
-        </h1>
+    <div className="flex min-h-screen bg-gray-100">
 
-       
-        <label className="block mb-4">
-          <p className="mb-1">Email Address</p>
-          <input
-            type="text"
-            name="email"
-            placeholder="Enter Your Email"
-            className="rounded-md w-full h-[40px] text-black px-3 outline-none"
-            value={formdata.email}
-            onChange={handleChange}
-          />
-        </label>
+      {/* LEFT IMAGE PANEL */}
+      <div
+        className="w-1/2 relative bg-cover bg-center"
+        style={{
+          backgroundImage:
+            "url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=800&q=60')",
+        }}
+      >
+        <div className="absolute inset-0 bg-blue-900 bg-opacity-60"></div>
 
-       
-        <label className="block mb-6">
-          <p className="mb-1">Password</p>
-          <input
-            type="password"
-            name="password"
-            placeholder="Enter Your Password"
-            className="rounded-md w-full h-[40px] text-black px-3 outline-none"
-            value={formdata.password}
-            onChange={handleChange}
-          />
-        </label>
-
-       
-        <button
-          type="submit"
-          className="w-full h-[42px] bg-blue-800 rounded-lg font-bold hover:bg-blue-700 transition"
-        >
-          Login
-        </button>
-
-        
-        <div className="flex justify-center mt-[25px]">
-          <p>Don't have an account?</p>
-          <Link to="/signup" className="text-white font-bold ml-2">
-            Sign up
-          </Link>
+        <div className="relative z-10 flex flex-col justify-center h-full px-16 text-white">
+          <h1 className="text-4xl font-bold">Welcome Back</h1>
+          <p className="text-lg mt-4 opacity-90">
+            We're happy to see you again! Login to continue managing your
+            teacher profile.
+          </p>
         </div>
       </div>
-    </form>
-  );
-}
 
-export default Login
+      {/* RIGHT FORM PANEL */}
+      <div className="w-1/2 flex justify-center items-center">
+        <form
+          onSubmit={handleForm}
+          className="bg-white w-[400px] p-10 rounded-3xl shadow-xl"
+        >
+          <h2 className="text-3xl font-bold text-center text-blue-900 mb-6">
+            Login
+          </h2>
+
+          <div className="space-y-4">
+            <input
+              type="text"
+              name="email"
+              placeholder="Enter Email"
+              className="w-full py-3 px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-700"
+              value={formdata.email}
+              onChange={handleChange}
+            />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter Password"
+              className="w-full py-3 px-4 rounded-xl border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-700"
+              value={formdata.password}
+              onChange={handleChange}
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="w-full mt-6 py-3 bg-blue-900 text-white font-bold rounded-xl hover:bg-blue-800 transition"
+          >
+            Login
+          </button>
+
+          <p className="text-center mt-4">
+            Don't have an account?
+            <Link to="/signup" className="text-blue-700 font-semibold ml-2">
+              Sign Up
+            </Link>
+          </p>
+        </form>
+      </div>
+    </div>
+  );
+};
+
+export default Login;
